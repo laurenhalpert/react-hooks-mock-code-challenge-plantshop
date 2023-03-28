@@ -1,10 +1,14 @@
 import React, {useState} from "react";
+import EditPrice from "./EditPrice";
 
 function PlantCard({plant}) {
   const [isStocked, setIsStocked] = useState(true);
+  const [isEdited, setIsEdited] = useState(false);
   function handleClick(){
     setIsStocked(!isStocked)
   }
+
+  
   return (
     <li className="card">
       <img src={plant.image} alt={"plant name"} />
@@ -15,6 +19,8 @@ function PlantCard({plant}) {
       ) : (
         <button onClick={handleClick}>Out of Stock</button>
       )}
+      <EditPrice plant={plant} isEdited={isEdited} setIsEdited={setIsEdited}/>
+      
     </li>
   );
 }
