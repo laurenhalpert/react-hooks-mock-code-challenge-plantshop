@@ -23,11 +23,14 @@ function App() {
   function handleAddPlant(newPlant) {
     setPlants([...plants, newPlant])
   }
+  function handlePlantDeletion(id) {
+    setPlants(plants.filter(plant=> plant.id !== id))
+  }
   const displayPlants = plants.filter(plant=> plant.name.toLowerCase().includes(search.toLowerCase()))
   return (
     <div className="app">
       <Header />
-      <PlantPage plants={displayPlants} onNewPlant={handleAddPlant} search={search} setSearch={setSearch}/>
+      <PlantPage onDel={handlePlantDeletion} plants={displayPlants} onNewPlant={handleAddPlant} search={search} setSearch={setSearch}/>
     </div>
   );
 }

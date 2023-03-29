@@ -1,13 +1,21 @@
 import React, {useState} from "react";
 import EditPrice from "./EditPrice";
 
-function PlantCard({plant}) {
+function PlantCard({plant, onDel}) {
   const [isStocked, setIsStocked] = useState(true);
   const [isEdited, setIsEdited] = useState(false);
   function handleClick(){
     setIsStocked(!isStocked)
   }
-
+  function handleDelete(){
+    fetch(`http://localhost:6001/plants/${plant.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    onDel(plant.id)
+  }
   
   return (
     <li className="card">
@@ -19,6 +27,7 @@ function PlantCard({plant}) {
       ) : (
         <button onClick={handleClick}>Out of Stock</button>
       )}
+      <button onClick={handleDelete}>Delete</button>
       <EditPrice plant={plant} isEdited={isEdited} setIsEdited={setIsEdited}/>
       
     </li>
